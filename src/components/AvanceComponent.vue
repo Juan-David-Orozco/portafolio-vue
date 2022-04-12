@@ -12,8 +12,8 @@
   export default {
     name: 'avance-component',
     props: {
-        progreso:Number,
-        esperado:Number
+      progreso:Number,
+      esperado:Number
     },
     data: function () {
       return {
