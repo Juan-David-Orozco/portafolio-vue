@@ -40,7 +40,26 @@ export default {
     axios.get('https://newsapi.org/v2/top-headlines?country='+pais)
     //axios.get('https://newsapi.org/v2/top-headlines?country='+pais,{headers:{'X-Api-Key':apiKey}})
     .then(response => {
-      this.Noticias=response.data.articles
+      if (response.status===200)
+        this.Noticias=response.data.articles
+      else{
+        this.Noticias=[{
+          publishedAt:Date.now(),
+          title:'Error en la carga de datos',
+          urlToImage:'http://icons.iconarchive.com/icons/aha-soft/software/128/cancel-icon.png',
+          content:'Se presentó un error al tratar de cargar las noticias en el sistema.',
+          source:{name:'Sistema Interno'}
+        }]
+      }
+    })
+    .catch(() => {
+      this.Noticias=[{
+          publishedAt:Date.now(),
+          title:'Error en la carga de datos',
+          urlToImage:'http://icons.iconarchive.com/icons/aha-soft/software/128/cancel-icon.png',
+          content:'Se presentó un error al tratar de cargar las noticias en el sistema.',
+          source:{name:'Sistema Interno'}
+        }]
     })
   }
 }
